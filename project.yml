@@ -1,0 +1,19 @@
+--- #project
+
+- hosts: dev
+  user: amruta
+  connection: ssh
+  become: yes
+  gather_facts: yes
+
+  tasks: 
+
+   - name: install docker
+     action: yum pkg=docker state=present
+     notify: start docker
+   
+  handlers: 
+    - name: start docker
+      service: 
+        name: docker
+        state: started
